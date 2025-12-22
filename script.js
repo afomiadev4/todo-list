@@ -188,7 +188,7 @@ addbtn.addEventListener('click', () => {
         description: '',
         completed: false,
         category: 'General',
-        dueDate: 'N/A'
+        dueDate: ''
     };
 
     fetch('http://localhost:3000/todos',{
@@ -204,5 +204,6 @@ addbtn.addEventListener('click', () => {
     input.value = '';
     loadTasks();
  })
+ 
  .catch(error => console.error('Error adding task:' , error))
  });
