@@ -4,7 +4,7 @@ const taskDetails = document.getElementById('taskDetails');
 const detTitle = document.querySelector('.title');
 const detDescription = document.querySelector('.description');
 const detDue = document.querySelector('.due-date');
-const detCategory = document.querySelector('.catagory');
+const detCategory = document.querySelector('.category');
 const input = document.getElementById('tasktitle');
 const addbtn = document.getElementById('addbtn');
 
@@ -56,7 +56,10 @@ function renderTasks(tasks){
                 text.style.opacity = '0.5';
             }
 
-            checkbox.addEventListener('change', () =>{
+            checkbox.addEventListener('change', (e) =>{
+
+                e.stopPropagation();
+
                 fetch(`http://localhost:3000/todos/${item.id}`,{
                     method:'PATCH',
                     headers: {
@@ -72,7 +75,10 @@ function renderTasks(tasks){
             const deletebtn = document.createElement('button');
             deletebtn.textContent = '❌';
 
-            deletebtn.addEventListener('click', () =>{
+            deletebtn.addEventListener('click', (e) =>{
+
+                e.stopPropagation();
+
                 fetch(`http://localhost:3000/todos/${item.id}`,{
                     method: 'DELETE',
                 })
@@ -82,7 +88,9 @@ function renderTasks(tasks){
             const editbtn = document.createElement('button');
             editbtn.textContent = '✏️';
 
-            editbtn.addEventListener('click', () =>{
+            editbtn.addEventListener('click', (e) =>{
+
+                e.stopPropagation();
 
                 task.querySelectorAll('.titleInput, .descInput, .dueDateInput, .categoryInput, .savebtn').forEach(el => el.remove());
 
@@ -131,8 +139,9 @@ function renderTasks(tasks){
             task.appendChild(titleInput);
             task.appendChild(descInput);
             task.appendChild(dueDateInput);
-            task.appendChild(savebtn);
             task.appendChild(categoryInput);
+            task.appendChild(savebtn);
+           
             });
 
             
@@ -147,17 +156,16 @@ function renderTasks(tasks){
 function showTaskDetails(task) {
   detTitle.textContent = task.title;
   detDescription.textContent = task.description || 'No description';
-  detDue.textContent = `Due: ${task.dueDate || 'N/A'}`;
+  detDue.textContent = `Due: ${task.dueDate || ''}`;
   detCategory.textContent = `Category: ${task.category || 'General'}`;
 
   taskDetails.classList.add('active');
 }
 
-renderTasks();
-//renderTasks();
 
 const searchInput = document.getElementById('searchInput');
 
+if(searchInput){
 searchInput.addEventListener('input', () => {
     const query = searchInput.value.toLowerCase();
 
@@ -167,6 +175,7 @@ searchInput.addEventListener('input', () => {
 
     renderTasks(filtered);
 });
+}
 
 addbtn.addEventListener('click', () => {
     const newtasktitle = input.value;
