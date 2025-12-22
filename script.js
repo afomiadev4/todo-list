@@ -1,21 +1,30 @@
+let allTasks = [];
 const tasklist = document.getElementById('tasklist');
 const input = document.getElementById('tasktitle');
 const addbtn = document.getElementById('addbtn');
 
-function renderTasks(){
-    tasklist.innerHTML = '';
-
+function loadTasks(){
     fetch('http://localhost:3000/todos')
     .then(response => response.json())
     .then(data => {
-        for(const item of data){
+        allTasks = data;
+        renderTasks(allTasks);
+    });
+}
+
+loadTasks();
+
+function renderTasks(tasks){
+    tasklist.innerHTML = '';
+
+    
+
+        for(const item of tasks){
             const task = document.createElement('div');
             task.style.display = 'flex';
             task.style.alignItems = 'center';
             task.style.gap = '10px';
 
-            /*task.textContent = item.title + " " + item.completed;
-            tasklist.appendChild(task);*/
 
             const checkbox = document.createElement('input');
             checkbox.type = 'checkbox';
@@ -39,7 +48,7 @@ function renderTasks(){
                     })
                     
                 })
-                .then(() => renderTasks());
+                .then(loadTasks);
             });
 
             const deletebtn = document.createElement('button');
@@ -49,7 +58,7 @@ function renderTasks(){
                 fetch(`http://localhost:3000/todos/${item.id}`,{
                     method: 'DELETE',
                 })
-                .then(() => renderTasks());
+                .then(loadTasks);
             });
 
             const editbtn = document.createElement('button');
@@ -57,7 +66,7 @@ function renderTasks(){
 
             editbtn.addEventListener('click', () =>{
 
-                task.querySelectorAll('input, .savebtn').forEach(el => el.remove());
+                task.querySelectorAll('.titleInput, .descInput, .dueDateInput, .categoryInput, .savebtn').forEach(el => el.remove());
 
                 const titleInput = document.createElement('input');
                 titleInput.value = item.title;
@@ -98,13 +107,14 @@ function renderTasks(){
                       category: categoryInput.value
                     })
                 })
-                .then(() => renderTasks());
+               .then(loadTasks);
             })
 
             task.appendChild(titleInput);
             task.appendChild(descInput);
             task.appendChild(dueDateInput);
             task.appendChild(savebtn);
+            task.appendChild(categoryInput);
             });
 
             
@@ -114,11 +124,21 @@ function renderTasks(){
             task.appendChild(editbtn);
             tasklist.appendChild(task);
         }
-    });
 }
 
-renderTasks();
+//renderTasks();
 
+const searchInput = document.getElementById('searchInput');
+
+searchInput.addEventListener('input', () => {
+    const query = searchInput.value.toLowerCase();
+
+    const filtered = allTasks.filter(task =>
+        task.title.toLowerCase().includes(query)
+    );
+
+    renderTasks(filtered);
+});
 
 addbtn.addEventListener('click', () => {
     const newtasktitle = input.value;
@@ -145,8 +165,7 @@ addbtn.addEventListener('click', () => {
  .then(response => response.json())
  .then(data => {
     input.value = '';
-    console.log('Task Added:', data);
-    renderTasks();
+    loadTasks();
  })
  .catch(error => console.error('Error adding task:' , error))
  });

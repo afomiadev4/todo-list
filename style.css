@@ -15,7 +15,7 @@ body {
     padding: 16px 24px;
 }
 .logo {
-    font-weight: bold;
+    font-family: 'sunroll';
 }
 .homepage {
     max-width: 600px;
@@ -35,4 +35,10 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+@font-face{
+    font-family: 'sunroll';
+    src: url('fonts/Sunroll.ttf');
+    font-style: normal;
 }
