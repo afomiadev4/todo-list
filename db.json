@@ -6,15 +6,15 @@
       "description": "",
       "completed": true,
       "category": "General",
-      "dueDate": "N/A"
+      "dueDate": ""
     },
     {
       "id": "c367",
-      "title": "clean ur room",
-      "description": "",
-      "completed": true,
-      "category": "General",
-      "dueDate": "N/A"
+      "title": "clean ur roomm",
+      "description": "clear out unwanted clothes",
+      "completed": false,
+      "category": "personal",
+      "dueDate": "2025-12-25"
     },
     {
       "id": "d2b9",
@@ -22,15 +22,7 @@
       "description": "",
       "completed": false,
       "category": "General",
-      "dueDate": "N/A"
-    },
-    {
-      "id": "39b0",
-      "title": "clean ur room",
-      "description": "",
-      "completed": false,
-      "category": "General",
-      "dueDate": "N/A"
+      "dueDate": ""
     }
   ]
 }
