@@ -177,6 +177,12 @@ addbtn.addEventListener('click', () => {
         loadTasks();
     }).catch(err => console.error('Error adding task:', err));
 });
+input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        addbtn.click();
+    }
+});
+
 
 // Initial load
 loadTasks();

@@ -111,8 +111,25 @@ html,body {
 .task{
     display: flex;
     align-items: center;
-    padding: 12px;
+    padding: 14px 16px;
+    background: #ffffff;
+    border-radius: 23px;
+    border: 1px solid #e6e6e6;
+    gap: 12px;
     cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+.task span{
+    font-size: 0.95rem;
+    color: #222;
+}
+.task:hover {
+  background: #f6f7fb;
+}
+
+.task.selected {
+  border-color: #5b5fc7;
+  background: #f2f3ff;
 }
 .task-details {
     position: fixed;
