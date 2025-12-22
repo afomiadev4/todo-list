@@ -205,3 +205,8 @@ addbtn.addEventListener('click', () => {
  
  .catch(error => console.error('Error adding task:' , error))
  });
+ input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        addbtn.click();
+    }
+});
