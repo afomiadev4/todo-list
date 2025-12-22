@@ -1,3 +1,38 @@
+body.dark{
+    background-color: #121212;
+    color: #eee;
+}
+
+body.dark .task{
+    background-color: #1e1e1e;
+    color: #eee;
+}
+
+body.dark .task-details{
+    background-color: #1b1b1b;
+    color: #eee;
+    border-left: 1px solid #333;
+}
+
+body.dark input,
+body.dark textarea{
+    background-color: #2b2b2b;
+    color: #eee;
+    border: 1px solid #555;
+}
+
+body.dark button{
+    background-color: #333;
+    color: #eee;
+    border: 1px solid #555;
+}
+
+body.dark .searchbar input{
+    background-color: #2b2b2b;
+    color: #eee;
+    border: 1px solid #555;
+}
+
 *{
     box-sizing: border-box;
     margin: 0;
