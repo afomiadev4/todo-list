@@ -178,5 +178,18 @@ addbtn.addEventListener('click', () => {
     }).catch(err => console.error('Error adding task:', err));
 });
 
+const darkModeBtn = document.getElementById('darkMode');
+
+darkModeBtn.addEventListener('click', () =>{
+    document.body.classList.toggle('dark');
+
+    if(document.body.classList.contains('dark')){
+        darkModeBtn.textContent = '☀️';
+    }
+    else{
+        darkModeBtn.textContent = '🌙';
+    }
+});
+
 // Initial load
 loadTasks();
