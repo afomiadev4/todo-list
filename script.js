@@ -11,7 +11,7 @@ function renderTasks(){
         for(const item of data){
             const task = document.createElement('div');
             task.style.display = 'flex';
-            task.style.alignContent = 'center';
+            task.style.alignItems = 'center';
             task.style.gap = '10px';
 
             /*task.textContent = item.title + " " + item.completed;
@@ -41,8 +41,61 @@ function renderTasks(){
                 })
                 .then(() => renderTasks());
             });
+
+            const deletebtn = document.createElement('button');
+            deletebtn.textContent = '❌';
+
+            deletebtn.addEventListener('click', () =>{
+                fetch(`http://localhost:3000/todos/${item.id}`,{
+                    method: 'DELETE',
+                })
+                .then(() => renderTasks());
+            });
+
+            const editbtn = document.createElement('button');
+            editbtn.textContent = '✏️';
+
+            editbtn.addEventListener('click', () =>{
+                const titleInput = document.createElement('input');
+                titleInput.value = item.title;
+
+                const descInput = document.createElement('input');
+                descInput.value = item.description;
+
+                const dueDateInput = document.createElement('input');
+                dueDateInput.value = item.dueDate;
+
+                const savebtn = document.createElement('button');
+                savebtn.textContent = '💾';
+
+
+                savebtn.addEventListener('click', () =>{
+                fetch(`http://localhost:3000/todos/${item.id}`,{
+                    method:'PATCH',
+                    headers: {
+                        'Content-Type' : 'application/json'
+                    },
+                    body: JSON.stringify({
+                      title: titleInput.value,
+                      description: descInput.value,
+                      dueDate: dueDateInput.value
+
+                    })
+                })
+                .then(() => renderTasks());
+            })
+
+            task.appendChild(titleInput);
+            task.appendChild(descInput);
+            task.appendChild(dueDateInput);
+            task.appendChild(savebtn);
+            });
+
+            
             task.appendChild(checkbox);
             task.appendChild(text);
+            task.appendChild(deletebtn);
+            task.appendChild(editbtn);
             tasklist.appendChild(task);
         }
     });
