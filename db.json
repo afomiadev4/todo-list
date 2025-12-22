@@ -20,7 +20,7 @@
       "id": "d2b9",
       "title": "go to the gym",
       "description": "",
-      "completed": true,
+      "completed": false,
       "category": "General",
       "dueDate": ""
     },
@@ -39,6 +39,14 @@
       "completed": false,
       "category": "General",
       "dueDate": "N/A"
+    },
+    {
+      "id": "9656",
+      "title": "clean ur room",
+      "description": "",
+      "completed": false,
+      "category": "General",
+      "dueDate": ""
     }
   ]
 }
