@@ -34,10 +34,10 @@ function renderTasks(){
                     method:'PATCH',
                     headers: {
                         'Content-Type' : 'application/json'
-                    },
-                    body: JSON.stringify({
+                    },body: JSON.stringify({
                         completed: checkbox.checked
                     })
+                    
                 })
                 .then(() => renderTasks());
             });
@@ -56,26 +56,33 @@ function renderTasks(){
             editbtn.textContent = '✏️';
 
             editbtn.addEventListener('click', () =>{
+
+                task.querySelectorAll('input, .savebtn').forEach(el => el.remove());
+
                 const titleInput = document.createElement('input');
                 titleInput.value = item.title;
                 titleInput.placeholder = 'Title';
+                titleInput.classList.add('titleInput');
 
                 const descInput = document.createElement('input');
                 descInput.value = item.description;
                 descInput.placeholder = 'Add a descrption ...';
+                descInput.classList.add('descInput');
 
                 const dueDateInput = document.createElement('input');
                 dueDateInput.type = 'date';
                 dueDateInput.value = item.dueDate;
                 dueDateInput.placeholder = 'Due Date';
+                dueDateInput.classList.add('dueDateInput');
 
                 const categoryInput = document.createElement('input');
                 categoryInput.value = item.category;
                 categoryInput.placeholder = 'Choose a catgeory';
-
+                categoryInput.classList.add('categoryInput');
 
                 const savebtn = document.createElement('button');
                 savebtn.textContent = '💾';
+                savebtn.classList.add('savebtn');
 
 
                 savebtn.addEventListener('click', () =>{
