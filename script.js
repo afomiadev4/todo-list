@@ -154,8 +154,8 @@ function renderTasks(tasks){
 function showTaskDetails(task) {
   detTitle.textContent = task.title;
   detDescription.textContent = task.description || 'No description';
-  detDue.textContent = `Due: ${task.dueDate || ''}`;
-  detCategory.textContent = `Category: ${task.category || 'General'}`;
+  detDue.textContent = task.dueDate || 'N/A';
+  detCategory.textContent = task.category || 'General';
 
   taskDetails.classList.add('active');
 }

@@ -32,6 +32,40 @@ html,body {
 .intro {
     margin: 20px 0;
 }
+.searchbar {
+    margin: 16px;
+    width: 100%;
+    border-radius: 60px;
+    position: relative;
+    margin: 12px 0;
+}
+#searchInput {
+  width: 100%;
+  max-width: 500px;
+  padding: 12px 14px;
+  padding-left: 38px;
+  font-size: 0.95rem;
+  border-radius: 22px;
+  border: 1px solid #ddd;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+#searchInput:focus {
+  border-color: #5b5fc7; 
+  box-shadow: 0 0 0 3px rgba(91, 95, 199, 0.15);
+}
+#searchInput::placeholder {
+  color: #999;
+}
+.searchbar::before {
+  content: "🔍";
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.9rem;
+  opacity: 0.6;
+}
 .tasks-layout{
     display: flex;
     height: 100%;
