@@ -61,9 +61,8 @@ html,body {
     background: #ffffff;
     padding: 24px;
 
-    transform: translateX(-100%);
+    transform: translateX(100%);
     transition: transform 0.35s cubic-bezier(.4,0,.2,1);
-   
     
     box-shadow: 6px 0 30px rgba(0, 0, 0, 0.12);
     z-index: 1000;
@@ -88,10 +87,6 @@ html,body {
 
   .task-list {
     flex: 2;
-  }
-
-  .task-details {
-    flex: 1;
   }
 }
 

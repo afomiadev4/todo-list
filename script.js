@@ -22,8 +22,6 @@ loadTasks();
 function renderTasks(tasks){
     tasklist.innerHTML = '';
 
-    
-
         for(const item of tasks){
             const task = document.createElement('div');
             task.style.display = 'flex';
