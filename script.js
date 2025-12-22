@@ -58,12 +58,21 @@ function renderTasks(){
             editbtn.addEventListener('click', () =>{
                 const titleInput = document.createElement('input');
                 titleInput.value = item.title;
+                titleInput.placeholder = 'Title';
 
                 const descInput = document.createElement('input');
                 descInput.value = item.description;
+                descInput.placeholder = 'Add a descrption ...';
 
                 const dueDateInput = document.createElement('input');
+                dueDateInput.type = 'date';
                 dueDateInput.value = item.dueDate;
+                dueDateInput.placeholder = 'Due Date';
+
+                const categoryInput = document.createElement('input');
+                categoryInput.value = item.category;
+                categoryInput.placeholder = 'Choose a catgeory';
+
 
                 const savebtn = document.createElement('button');
                 savebtn.textContent = '💾';
@@ -78,8 +87,8 @@ function renderTasks(){
                     body: JSON.stringify({
                       title: titleInput.value,
                       description: descInput.value,
-                      dueDate: dueDateInput.value
-
+                      dueDate: dueDateInput.value,
+                      category: categoryInput.value
                     })
                 })
                 .then(() => renderTasks());
