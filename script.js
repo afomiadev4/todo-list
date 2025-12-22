@@ -7,6 +7,13 @@ const detDue = document.querySelector('.due-date');
 const detCategory = document.querySelector('.category');
 const input = document.getElementById('tasktitle');
 const addbtn = document.getElementById('addbtn');
+const searchInput = document.getElementById('searchInput');
+
+const editBtn = taskDetails.querySelector('#editTaskBtn');
+const deleteBtn = taskDetails.querySelector('#deleteTaskBtn');
+const completeCheckbox = taskDetails.querySelector('#completeTaskCheckbox');
+
+
 
 function loadTasks(){
     fetch('http://localhost:3000/todos')
@@ -17,34 +24,20 @@ function loadTasks(){
     });
 }
 
-loadTasks();
 
 function renderTasks(tasks){
     tasklist.innerHTML = '';
 
         for(const item of tasks){
             const task = document.createElement('div');
+            task.classList.add('task');
             task.style.display = 'flex';
             task.style.alignItems = 'center';
             task.style.gap = '10px';
-            
-            task.classList.add('task');
-
-            task.addEventListener('click', (e) => {
-                if (e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON') return;
-
-                showTaskDetails(item);
-
-                document.querySelectorAll('.task').forEach(t =>
-                    t.classList.remove('selected')
-                );
-                task.classList.add('selected');
-            });
-
 
             const checkbox = document.createElement('input');
             checkbox.type = 'checkbox';
-            checkbox.checked = item.completed;
+            checkbox.checked = item.completed;     
 
             const text = document.createElement('span');
             text.textContent = item.title;
@@ -70,27 +63,58 @@ function renderTasks(tasks){
                 .then(loadTasks);
             });
 
-            const deletebtn = document.createElement('button');
-            deletebtn.textContent = '❌';
+            task.addEventListener('click', (e) => {
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON') return;
 
-            deletebtn.addEventListener('click', (e) =>{
-
-                e.stopPropagation();
-
-                fetch(`http://localhost:3000/todos/${item.id}`,{
-                    method: 'DELETE',
-                })
-                .then(loadTasks);
+                showTaskDetails(item);
             });
 
-            const editbtn = document.createElement('button');
-            editbtn.textContent = '✏️';
+            tasklist.appendChild(task);
+            task.appendChild(checkbox);
+            task.appendChild(text);
 
-            editbtn.addEventListener('click', (e) =>{
+           
+
+            
+
+            
+
+        
+
+            task.appendChild(titleInput);
+            task.appendChild(descInput);
+            task.appendChild(dueDateInput);
+            task.appendChild(categoryInput);
+            
+           
+            
+
+            
+            
+            
+           
+        }
+}
+
+function showTaskDetails(item) {
+
+  detTitle.textContent = item.title;
+  detDescription.textContent = item.description || 'No description';
+  detDue.textContent = item.dueDate || 'N/A';
+  detCategory.textContent = item.category || 'General';
+
+  const existingBtns = taskDetails.querySelectorAll('.details-btn');
+  existingBtns.forEach(btn => btn.remove());
+
+  const editbtn = document.createElement('button');
+  editbtn.textContent = 'Edit';
+  editbtn.classList.add('details-btn');
+
+      editbtn.addEventListener('click', (e) =>{
 
                 e.stopPropagation();
 
-                task.querySelectorAll('.titleInput, .descInput, .dueDateInput, .categoryInput, .savebtn').forEach(el => el.remove());
+                //task.querySelectorAll('.titleInput, .descInput, .dueDateInput, .categoryInput, .savebtn').forEach(el => el.remove());
 
                 const titleInput = document.createElement('input');
                 titleInput.value = item.title;
@@ -115,7 +139,14 @@ function renderTasks(tasks){
 
                 const savebtn = document.createElement('button');
                 savebtn.textContent = '💾';
-                savebtn.classList.add('savebtn');
+                savebtn.classList.add('details-btn');
+
+                detTitle.replaceWith(titleInput);
+                detDescription.replaceWith(descInput);
+                detDue.replaceWith(dueDateInput);
+                detCategory.replaceWith(categoryInput);
+
+                task.appendChild(savebtn);
 
 
                 savebtn.addEventListener('click', () =>{
@@ -131,37 +162,46 @@ function renderTasks(tasks){
                       category: categoryInput.value
                     })
                 })
-               .then(loadTasks);
-            })
 
-            task.appendChild(titleInput);
-            task.appendChild(descInput);
-            task.appendChild(dueDateInput);
-            task.appendChild(categoryInput);
-            task.appendChild(savebtn);
-           
+                .then(() =>{
+                    detTitle.textContent = titleInput.value;
+                    detDescription.textContent = descInput.value;
+                    detDue.textContent = dueDateInput.value;
+                    detCategory.textContent = categoryInput.value;
+
+                    titleInput.replaceWith(detTitle);
+                    descInput.replaceWith(detDescription);
+                    dueDateInput.replaceWith(detDue);
+                    categoryInput.replaceWith(detCategory);
+                    savebtn.remove();
+                    loadTasks();
+                });
+            });
+        });
+
+        const deletebtn = document.createElement('button');
+            deletebtn.textContent = '❌ Delete';
+            deletebtn.classList.add('details-btn');
+            deletebtn.addEventListener('click', (e) =>{
+                e.stopPropagation();
+
+                fetch(`http://localhost:3000/todos/${item.id}`,{
+                    method: 'DELETE',
+                })
+                .then(( => {
+                    taskDetails.classList.remove('active');
+                    loadTasks();
+                }));
             });
 
-            
-            task.appendChild(checkbox);
-            task.appendChild(text);
-            task.appendChild(deletebtn);
-            task.appendChild(editbtn);
-            tasklist.appendChild(task);
-        }
-}
-
-function showTaskDetails(task) {
-  detTitle.textContent = task.title;
-  detDescription.textContent = task.description || 'No description';
-  detDue.textContent = `Due: ${task.dueDate || ''}`;
-  detCategory.textContent = `Category: ${task.category || 'General'}`;
-
+      task.appendChild(editbtn);
+      task.appendChild(deletebtn);
+      
   taskDetails.classList.add('active');
 }
 
 
-const searchInput = document.getElementById('searchInput');
+
 
 if(searchInput){
 searchInput.addEventListener('input', () => {
@@ -202,6 +242,8 @@ addbtn.addEventListener('click', () => {
     input.value = '';
     loadTasks();
  })
- 
+
  .catch(error => console.error('Error adding task:' , error))
  });
+
+ loadTasks();
