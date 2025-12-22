@@ -27,6 +27,7 @@ html,body {
     max-width: 1000px;
     margin: 0 auto;
     width: 100%;
+    flex: 1;
 }
 .intro {
     margin: 20px 0;
@@ -42,7 +43,7 @@ html,body {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    margin: 20px 0;
+    margin-top: 20px;
 }
 .task{
     display: flex;
@@ -73,7 +74,7 @@ html,body {
 
   .tasks-layout {
     flex-direction: row;
-    align-items: flex-start;
+    align-items: stretch;
   }
 
   .task-list {
