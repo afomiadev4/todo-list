@@ -17,7 +17,7 @@ body.dark .task-details{
 body.dark input,
 body.dark textarea{
     background-color: #2b2b2b;
-    color: #eee;
+    color: #f5f5f5;
     border: 1px solid #555;
 }
 
@@ -32,6 +32,18 @@ body.dark .searchbar input{
     color: #eee;
     border: 1px solid #555;
 }
+
+
+body.dark input::placeholder,
+body.dark textarea::placeholder{
+    color: #aaa;
+}
+
+body.dark input[type="text"],
+body.dark input[type="date"]{
+    color: #f5f5f5 ;
+}
+
 
 *{
     box-sizing: border-box;
