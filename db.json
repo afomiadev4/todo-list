@@ -1,0 +1,36 @@
+{
+  "todos": [
+    {
+      "title": "Do homework",
+      "description": "finish ur web project by 11:59",
+      "completed": false,
+      "category": "School",
+      "dueDate": "Sep, 14, 2026",
+      "id": "b108"
+    },
+    {
+      "id": "7cbb",
+      "title": "clean ur room",
+      "description": "",
+      "completed": false,
+      "category": "General",
+      "dueDate": "N/A"
+    },
+    {
+      "id": "15f3",
+      "title": "read the bible",
+      "description": "",
+      "completed": false,
+      "category": "General",
+      "dueDate": "N/A"
+    },
+    {
+      "id": "e276",
+      "title": "call mom",
+      "description": "",
+      "completed": true,
+      "category": "General",
+      "dueDate": "N/A"
+    }
+  ]
+}
