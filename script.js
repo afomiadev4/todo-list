@@ -1,4 +1,9 @@
 const tasklist = document.getElementById('tasklist');
+const taskDetails = document.getElementById('taskDetails');
+const detTitle = document.querySelector('.title');
+const detDescription = document.querySelector('.description');
+const detDue = document.querySelector('.due-date');
+const detCategory = document.querySelector('.catagory');
 const input = document.getElementById('tasktitle');
 const addbtn = document.getElementById('addbtn');
 
@@ -13,6 +18,19 @@ function renderTasks(){
             task.style.display = 'flex';
             task.style.alignItems = 'center';
             task.style.gap = '10px';
+            
+            task.classList.add('task');
+
+            task.addEventListener('click', (e) => {
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON') return;
+
+                showTaskDetails(item);
+
+                document.querySelectorAll('.task').forEach(t =>
+                    t.classList.remove('selected')
+                );
+                task.classList.add('selected');
+            });
 
             /*task.textContent = item.title + " " + item.completed;
             tasklist.appendChild(task);*/
@@ -115,6 +133,15 @@ function renderTasks(){
             tasklist.appendChild(task);
         }
     });
+}
+
+function showTaskDetails(task) {
+  detTitle.textContent = task.title;
+  detDescription.textContent = task.description || 'No description';
+  detDue.textContent = `Due: ${task.dueDate || 'N/A'}`;
+  detCategory.textContent = `Category: ${task.category || 'General'}`;
+
+  taskDetails.classList.add('active');
 }
 
 renderTasks();

@@ -18,12 +18,21 @@ body {
     font-weight: bold;
 }
 .homepage {
-    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+
     margin: 20px;
     padding: 0 16px;
 }
+
 .intro {
     margin: 20px 0;
+}
+.tasks-layout{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: stretch;
 }
 .task-list {
     display: flex;
@@ -33,6 +42,39 @@ body {
 }
 .task{
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    padding: 12px;
+    cursor: pointer;
+}
+.task-details{
+    display: none;
+    min-height: 100%;
+    background: #f7f7f9;
+    padding: 24x;
+    gap: 16px;
+    border-left: 1px solid #ddd;
+    flex-direction: column;
+    border-radius: 8px;
+}
+.task-details.active {
+    display: block;
+}
+.task-details h3 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+}
+@media (min-width: 768px) {
+
+  .tasks-layout {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .task-list {
+    flex: 2;
+  }
+
+  .task-details {
+    flex: 1;
+  }
 }
