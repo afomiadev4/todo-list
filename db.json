@@ -20,7 +20,7 @@
       "id": "15f3",
       "title": "read the bible",
       "description": "",
-      "completed": false,
+      "completed": true,
       "category": "General",
       "dueDate": "N/A"
     },
@@ -29,6 +29,14 @@
       "title": "call mom",
       "description": "",
       "completed": true,
+      "category": "General",
+      "dueDate": "N/A"
+    },
+    {
+      "id": "2fbb",
+      "title": "go to the gym",
+      "description": "",
+      "completed": false,
       "category": "General",
       "dueDate": "N/A"
     }
