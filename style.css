@@ -205,6 +205,12 @@ html,body {
     font-size: 1.1rem;
     margin-bottom: 8px;
 }
+.head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
 @media (min-width: 768px) {
 
   .tasks-layout {
