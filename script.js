@@ -306,6 +306,16 @@ darkModeBtn.addEventListener('click', () =>{
     }
 });
 
+document.addEventListener('click', (e) => {
+    if (!taskDetails.classList.contains('active')) return;
+
+    if (taskDetails.contains(e.target)) return;
+    if (e.target.closest('.task')) return;
+
+    taskDetails.classList.remove('active');
+    activeTaskId = null;
+});
+
 
 // Initial load
 loadTasks();
