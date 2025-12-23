@@ -10,14 +10,22 @@
     },
     {
       "id": "c367",
-      "title": "clean ur roomm",
+      "title": "clean ur room",
       "description": "clear out unwanted clothes",
-      "completed": true,
-      "category": "personal",
+      "completed": false,
+      "category": "cleanliness",
       "dueDate": "2025-12-25"
     },
     {
-      "id": "d2b9",
+      "id": "9c41",
+      "title": "read the bible",
+      "description": "luke 12",
+      "completed": true,
+      "category": "spiritual",
+      "dueDate": "2025-12-26"
+    },
+    {
+      "id": "ea65",
       "title": "go to the gym",
       "description": "",
       "completed": true,
@@ -25,27 +33,11 @@
       "dueDate": ""
     },
     {
-      "id": "9c41",
-      "title": "read the bible",
-      "description": "luke 12",
-      "completed": true,
-      "category": "bible",
-      "dueDate": "2025-12-26"
-    },
-    {
-      "id": "e5f7",
-      "title": "heyyy",
+      "id": "05bc",
+      "title": "help around",
       "description": "",
       "completed": false,
-      "category": "General",
-      "dueDate": "N/A"
-    },
-    {
-      "id": "2ee0",
-      "title": "hi",
-      "description": "",
-      "completed": false,
-      "category": "General",
+      "category": "health",
       "dueDate": ""
     }
   ]

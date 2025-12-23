@@ -12,13 +12,6 @@
         <div class="logo">
             To Do List
         </div>
-        <nav class="navbar">
-           <a href="">Dashboard</a>
-           <a href="">Important</a>
-           <a href="">Planned</a>
-           <a href="">Completed</a>
-        </nav>
-
         <button id="darkMode">🌙</button>
         </header>
 
@@ -37,41 +30,36 @@
             <div class="tasks-layout">
                 <div class="task-list" id="tasklist">
 
-                    
                 </div>
             
                 <div class="task-details" id="taskDetails">
                     <div class="head">
+                        <input type="checkbox" id="completeTaskCheckbox">
                         <h3 class="title"></h3>
                     </div>
 
                     <div class="details-actions">
                         <div class="action-item">
-                            <span>📅 Due date</span>
+                            <span>📅 Due Date</span>
                             <span class="due-date"></span>
                         </div>
 
                         <div class="action-item">
-                            <span>🏷 Category</span>
+                            <span>Category</span>
                             <span class="category"></span>
                         </div>
                     </div>
 
                     <div class="details-note">
                         <label>Description</label>
-                        <p class="description"></p>
+                        <p class="description" placeholder="None"></p>
                     </div>
 
                     <div class="action-btn">
                         <button id="editTaskBtn">✏️ Edit</button>
-                        <button id="deleteTaskBtn">❌ Delete</button>
+                        <button id="deleteTaskBtn">🗑️ Delete</button>
 
-                        <label>
-                            Completed:
-                            <input type="checkbox" id="completeTaskCheckbox">
-                        </label>
                     </div>
-                
                 </div>
             </div>
 
