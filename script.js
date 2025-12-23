@@ -85,6 +85,7 @@ function renderTasks(tasks) {
 
             if (activeTaskId === item.id) {
                 taskDetails.classList.remove('active');
+                document.classList.remove('panel-remove')
                 activeTaskId = null;
                 return;
             }
@@ -238,6 +239,7 @@ function showTaskDetails(item) {
         fetch(`http://localhost:3000/todos/${item.id}`, { method: 'DELETE' })
             .then(() => {
                 taskDetails.classList.remove('active', 'inline');
+                document.body.classList.remove('panel-open');
                 activeTaskId = null;
                 loadTasks();
             });
@@ -247,13 +249,15 @@ function showTaskDetails(item) {
         const taskEl = document.querySelector('.task.selected');
         if (taskEl) {
             taskEl.after(taskDetails);
-            taskDetails.classList.remove('inline');
-            taskDetails.classList.add('active');
+            taskDetails.classList.add('inline', 'active');
+            document.body.classList.remove('panel-open')
         }
     } else {
         document.body.appendChild(taskDetails);
-        taskDetails.classList.add('inline');
-        taskDetails.classList.remove('active');
+        taskDetails.classList.remove('inline');
+        taskDetails.classList.add('active');
+
+        document.body.classList.add('panel-open');
     }
 }
 
