@@ -7,6 +7,7 @@ function getCategories() {
     return [...new Set(cats)];
 }
 
+
 let activeTaskId = null;
 const tasklist = document.getElementById('tasklist');
 const taskDetails = document.getElementById('taskDetails');
@@ -20,6 +21,15 @@ const searchInput = document.getElementById('searchInput');
 const editBtn = taskDetails.querySelector('#editTaskBtn');
 const deleteBtn = taskDetails.querySelector('#deleteTaskBtn');
 const completeCheckbox = taskDetails.querySelector('#completeTaskCheckbox');
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'dark') {
+    document.body.classList.add('dark');
+  }
+});
+
 
 // Load all tasks from the server
 function loadTasks() {
@@ -270,12 +280,15 @@ darkModeBtn.addEventListener('click', () =>{
     document.body.classList.toggle('dark');
 
     if(document.body.classList.contains('dark')){
+        localStorage.setItem('theme', 'dark');
         darkModeBtn.textContent = '☀️';
     }
     else{
+        localStorage.setItem('theme', 'light');
         darkModeBtn.textContent = '🌙';
     }
 });
+
 
 // Initial load
 loadTasks();
