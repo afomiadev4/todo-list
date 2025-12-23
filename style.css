@@ -159,6 +159,7 @@ html,body {
     flex-direction: column;
     gap: 12px;
     margin-top: 20px;
+    gap: 8px;
 }
 .task{
     display: flex;
@@ -167,6 +168,7 @@ html,body {
     background: #ffffff;
     border-radius: 23px;
     border: 1px solid #e6e6e6;
+    padding: 12px 14px;
     gap: 12px;
     cursor: pointer;
     transition: background 0.2s ease, border-color 0.2s ease;
@@ -192,6 +194,9 @@ html,body {
 .head h3{
     font-size: 1.2rem;
     font-weight: 600;
+}
+.task-details .head {
+  margin-bottom: 16px;
 }
 .task-details .head input[type="checkbox"] {
   width: 26px;
@@ -243,6 +248,7 @@ input[type="checkbox"]:checked::after {
 }
 .task-details {
     position: fixed;
+    display: none;
     top: 0;
     right: 0;
     height: 100%;
@@ -257,7 +263,6 @@ input[type="checkbox"]:checked::after {
     box-shadow: 6px 0 30px rgba(0, 0, 0, 0.12);
     z-index: 1000;
 
-    display: flex;
     flex-direction: column;
     gap: 16px   ;
 }
@@ -329,12 +334,12 @@ input[type="checkbox"]:checked::after {
 .details-actions  {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 8px;
 }
 .details-note {
     display: flex;
     flex-direction: column;
-    margin-top: 8px;
+    margin-top: 12px;
     gap: 6px;
 }
 .details-note label {
@@ -350,8 +355,7 @@ input[type="checkbox"]:checked::after {
   font-size: 0.95rem;
   line-height: 1.5;
 }
-@media (min-width: 768px) {
-
+@media (min-width: 767px) {
   .tasks-layout {
     flex-direction: row;
     align-items: stretch;
@@ -359,6 +363,40 @@ input[type="checkbox"]:checked::after {
 
   .task-list {
     flex: 2;
+  }
+}
+@media (max-width: 767px) {
+  .task-details.active {
+    display: block;
+  }
+  .task-details {
+    position: static;
+    width: 100%;
+    height: auto;
+    transform: none;
+    box-shadow: none;
+    border-radius: 16px;
+    border: 1px solid #e6e6e6;
+    margin-top: 10px;
+  }
+  .task.selected {
+    margin-bottom: 6px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  .task-details {
+    margin-top: 6px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+}
+@media (min-width: 768px) {
+  .task-details {
+    display: flex;
+  }
+
+  .task-details.active {
+    transform: translateX(0);
   }
 }
 
@@ -371,6 +409,7 @@ input[type="checkbox"]:checked::after {
     margin-top:auto;
     display: flex;
     gap: 12px;
+    margin-top: 12px;
 }
 .action-btn button {
   flex: 1;

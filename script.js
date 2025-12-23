@@ -30,6 +30,9 @@ function loadTasks() {
             renderTasks(allTasks);
         });
 }
+function isMobile() {
+    return window.innerWidth < 768
+}
 
 // Render the task list
 function renderTasks(tasks) {
@@ -66,7 +69,10 @@ function renderTasks(tasks) {
 
         // Click task to show details
         task.addEventListener('click', e => {
-            if (e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON') return;
+            if (e.target.tagName === 'INPUT') return;
+            document.querySelectorAll('.task').forEach(t => t.classList.remove('selected'));
+            task.classList.add('selected');
+
             if (activeTaskId === item.id) {
                 taskDetails.classList.remove('active');
                 activeTaskId = null;
@@ -221,13 +227,24 @@ function showTaskDetails(item) {
     deleteBtn.onclick = () => {
         fetch(`http://localhost:3000/todos/${item.id}`, { method: 'DELETE' })
             .then(() => {
-                taskDetails.classList.remove('active');
+                taskDetails.classList.remove('active', 'inline');
                 activeTaskId = null;
                 loadTasks();
             });
     };
 
-    taskDetails.classList.add('active');
+    if (isMobile()) {
+        const taskEl = document.querySelector('.task.selected');
+        if (taskEl) {
+            taskEl.after(taskDetails);
+            taskDetails.classList.remove('inline');
+            taskDetails.classList.add('active');
+        }
+    } else {
+        document.body.appendChild(taskDetails);
+        taskDetails.classList.add('inline');
+        taskDetails.classList.remove('active');
+    }
 }
 
 // Search
