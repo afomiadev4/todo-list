@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.add('dark');
   }
 });
-
+activeTaskId
 
 // Load all tasks from the server
 function loadTasks() {
@@ -83,12 +83,20 @@ function renderTasks(tasks) {
             document.querySelectorAll('.task').forEach(t => t.classList.remove('selected'));
             task.classList.add('selected');
 
-            if (activeTaskId === item.id) {
-                taskDetails.classList.remove('active');
-                document.classList.remove('panel-remove')
-                activeTaskId = null;
-                return;
-            }
+            task.addEventListener('click', e => {
+            if (e.target.tagName === 'INPUT') return;
+
+            // clear selection
+            document.querySelectorAll('.task').forEach(t =>
+                t.classList.remove('selected')
+            );
+
+            task.classList.add('selected');
+            activeTaskId = item.id;
+
+            showTaskDetails(item);
+        });
+
             activeTaskId = item.id;
             showTaskDetails(item);
         });
@@ -241,6 +249,7 @@ function showTaskDetails(item) {
                 taskDetails.classList.remove('active', 'inline');
                 document.body.classList.remove('panel-open');
                 activeTaskId = null;
+                
                 loadTasks();
             });
     };
@@ -249,10 +258,14 @@ function showTaskDetails(item) {
         const taskEl = document.querySelector('.task.selected');
         if (taskEl) {
             taskEl.after(taskDetails);
-            taskDetails.classList.add('inline', 'active');
+            taskDetails.classList.add('inline');
+            taskDetails.classList.add('active');
             document.body.classList.remove('panel-open')
         }
     } else {
+        if (!document.body.contains(taskDetails)) {
+            document.body.appendChild(taskDetails);
+        }
         document.body.appendChild(taskDetails);
         taskDetails.classList.remove('inline');
         taskDetails.classList.add('active');
@@ -311,12 +324,20 @@ darkModeBtn.addEventListener('click', () =>{
 });
 
 document.addEventListener('click', (e) => {
-    if (!taskDetails.classList.contains('active')) return;
+    const clickedTask = e.target.closest('.task');
+    const clickedPanel = e.target.closest('.task-details');
 
-    if (taskDetails.contains(e.target)) return;
-    if (e.target.closest('.task')) return;
+    if (clickedTask || clickedPanel) return;
 
+    // close panel
     taskDetails.classList.remove('active');
+    document.body.classList.remove('panel-open');
+
+    // clear selection
+    document.querySelectorAll('.task').forEach(t =>
+        t.classList.remove('selected')
+    );
+
     activeTaskId = null;
 });
 

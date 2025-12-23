@@ -12,9 +12,9 @@
       "id": "9c41",
       "title": "read the bible",
       "description": "luke 12",
-      "completed": false,
-      "category": "General",
-      "dueDate": "2025-12-11"
+      "completed": true,
+      "category": "spiritual",
+      "dueDate": "2025-12-26"
     },
     {
       "id": "ea65",
