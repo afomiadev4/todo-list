@@ -1,4 +1,13 @@
 let allTasks = [];
+function getCategories() {
+    const cats = allTasks
+        .map(task => task.category)
+        .filter(Boolean);
+
+    return [...new Set(cats)];
+}
+
+let activeTaskId = null;
 const tasklist = document.getElementById('tasklist');
 const taskDetails = document.getElementById('taskDetails');
 const detTitle = document.querySelector('.title');
@@ -58,6 +67,12 @@ function renderTasks(tasks) {
         // Click task to show details
         task.addEventListener('click', e => {
             if (e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON') return;
+            if (activeTaskId === item.id) {
+                taskDetails.classList.remove('active');
+                activeTaskId = null;
+                return;
+            }
+            activeTaskId = item.id;
             showTaskDetails(item);
         });
 
@@ -69,10 +84,14 @@ function renderTasks(tasks) {
 
 // Show task details in drawer
 function showTaskDetails(item) {
+    taskDetails.classList.toggle('completed', item.completed);
     detTitle.textContent = item.title;
-    detDescription.textContent = item.description || 'No description';
-    detDue.textContent = item.dueDate || 'N/A';
-    detCategory.textContent = item.category || 'General';
+    detDescription.textContent = 
+        item.description && item.description.trim() !== ''
+        ?item.description
+        :'None';
+    detDue.textContent = item.dueDate || 'Add a due date';
+    detCategory.textContent = item.category || 'None';
 
     // Set completed checkbox
     completeCheckbox.checked = item.completed;
@@ -81,38 +100,93 @@ function showTaskDetails(item) {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ completed: completeCheckbox.checked })
-        }).then(loadTasks);
+        }).then(() => {
+            taskDetails.classList.toggle('completed', completeCheckbox.checked);
+            loadTasks();
+        });
     };
 
     // Edit button
     editBtn.onclick = () => {
+        
+        if (taskDetails.classList.contains('editing')) return;
+        taskDetails.classList.add('editing');
+
+        editBtn.style.display = 'none';
+        deleteBtn.style.display = 'none';
+
         const titleInput = document.createElement('input');
         titleInput.value = item.title;
         titleInput.placeholder = 'Title';
 
         const descInput = document.createElement('input');
         descInput.value = item.description;
-        descInput.placeholder = 'Description';
+        descInput.placeholder = 'Add a description...';
 
         const dueInput = document.createElement('input');
         dueInput.type = 'date';
         dueInput.value = item.dueDate;
 
-        const categoryInput = document.createElement('input');
-        categoryInput.value = item.category;
-        categoryInput.placeholder = 'Category';
+        const categoryWrapper = document.createElement('div');
+        categoryWrapper.style.display = 'flex';
+        categoryWrapper.style.flexDirection = 'column';
+        categoryWrapper.style.gap = '6px';
+        // Category dropdown
+        const categorySelect = document.createElement('select');
+
+        getCategories().forEach(cat => {
+            const option = document.createElement('option');
+            option.value = cat;
+            option.textContent = cat;
+            if (cat === item.category) option.selected = true;
+            categorySelect.appendChild(option);
+        });
+
+        // Add "new category" option
+        const addNewOption = document.createElement('option');
+        addNewOption.value = '__new__';
+        addNewOption.textContent = '➕ Add new category';
+        categorySelect.appendChild(addNewOption);
+
+        // New category input (hidden by default)
+        const newCategoryInput = document.createElement('input');
+        newCategoryInput.placeholder = 'New category';
+        newCategoryInput.style.display = 'none';
+
+        categorySelect.addEventListener('change', () => {
+            newCategoryInput.style.display =
+                categorySelect.value === '__new__' ? 'block' : 'none';
+        });
+
+        categoryWrapper.appendChild(categorySelect);
+        categoryWrapper.appendChild(newCategoryInput);
 
         const saveBtn = document.createElement('button');
-        saveBtn.textContent = '💾 Save';
+        saveBtn.textContent = 'Save';
+        saveBtn.classList.add('save-btn');
+
+        // Save on Enter (but allow Shift+Enter for description)
+        taskDetails.addEventListener('keydown', function onEnterSave(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                saveBtn.click();
+                taskDetails.removeEventListener('keydown', onEnterSave);
+            }
+        });
 
         // Replace text with inputs
         detTitle.replaceWith(titleInput);
         detDescription.replaceWith(descInput);
         detDue.replaceWith(dueInput);
-        detCategory.replaceWith(categoryInput);
+        detCategory.replaceWith(categoryWrapper);
         taskDetails.appendChild(saveBtn);
 
         saveBtn.addEventListener('click', () => {
+            const finalCategory =
+            categorySelect.value === '__new__'
+                ? newCategoryInput.value.trim() || 'General'
+                : categorySelect.value;
+
             fetch(`http://localhost:3000/todos/${item.id}`, {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
@@ -120,19 +194,24 @@ function showTaskDetails(item) {
                     title: titleInput.value,
                     description: descInput.value,
                     dueDate: dueInput.value,
-                    category: categoryInput.value
+                    category: finalCategory
                 })
             }).then(() => {
                 detTitle.textContent = titleInput.value;
                 detDescription.textContent = descInput.value;
                 detDue.textContent = dueInput.value;
-                detCategory.textContent = categoryInput.value;
+                detCategory.textContent = finalCategory;
 
                 titleInput.replaceWith(detTitle);
                 descInput.replaceWith(detDescription);
                 dueInput.replaceWith(detDue);
-                categoryInput.replaceWith(detCategory);
+                categoryWrapper.replaceWith(detCategory);
                 saveBtn.remove();
+
+                editBtn.style.display = 'inline-flex';
+                deleteBtn.style.display = 'inline-flex';
+
+                taskDetails.classList.remove('editing');
                 loadTasks();
             });
         });
@@ -143,6 +222,7 @@ function showTaskDetails(item) {
         fetch(`http://localhost:3000/todos/${item.id}`, { method: 'DELETE' })
             .then(() => {
                 taskDetails.classList.remove('active');
+                activeTaskId = null;
                 loadTasks();
             });
     };
