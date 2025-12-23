@@ -4,7 +4,7 @@
       "id": "c367",
       "title": "clean ur room",
       "description": "clear out unwanted clothes",
-      "completed": true,
+      "completed": false,
       "category": "cleanliness",
       "dueDate": "2025-12-25"
     },
@@ -35,6 +35,14 @@
     {
       "id": "7654",
       "title": "hzfjkhzkfhg",
+      "description": "",
+      "completed": true,
+      "category": "General",
+      "dueDate": ""
+    },
+    {
+      "id": "0dbd",
+      "title": "call momm",
       "description": "",
       "completed": true,
       "category": "General",
