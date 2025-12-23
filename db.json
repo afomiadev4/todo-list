@@ -1,18 +1,10 @@
 {
   "todos": [
     {
-      "id": "e276",
-      "title": "call mom",
-      "description": "weowwww",
-      "completed": false,
-      "category": "General",
-      "dueDate": "2025-12-19"
-    },
-    {
       "id": "c367",
       "title": "clean ur room",
       "description": "clear out unwanted clothes",
-      "completed": false,
+      "completed": true,
       "category": "cleanliness",
       "dueDate": "2025-12-25"
     },
@@ -21,8 +13,8 @@
       "title": "read the bible",
       "description": "luke 12",
       "completed": false,
-      "category": "spiritual",
-      "dueDate": "2025-12-26"
+      "category": "General",
+      "dueDate": "2025-12-11"
     },
     {
       "id": "ea65",
