@@ -20,7 +20,7 @@
       "id": "d2b9",
       "title": "go to the gym",
       "description": "",
-      "completed": false,
+      "completed": true,
       "category": "General",
       "dueDate": ""
     },
@@ -39,6 +39,14 @@
       "completed": false,
       "category": "General",
       "dueDate": "N/A"
+    },
+    {
+      "id": "2ee0",
+      "title": "hi",
+      "description": "",
+      "completed": false,
+      "category": "General",
+      "dueDate": ""
     }
   ]
 }
