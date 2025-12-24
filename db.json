@@ -1,52 +1,36 @@
 {
   "todos": [
     {
-      "id": "c367",
+      "id": "c3bc",
       "title": "clean ur room",
-      "description": "clear out unwanted clothes",
-      "completed": false,
-      "category": "cleanliness",
-      "dueDate": "2025-12-25"
+      "description": "take out unwanted clothes",
+      "completed": true,
+      "category": "personal",
+      "dueDate": "2025-12-27"
     },
     {
-      "id": "9c41",
+      "id": "574e",
       "title": "read the bible",
-      "description": "luke 12",
-      "completed": true,
+      "description": "luke 12-16",
+      "completed": false,
       "category": "spiritual",
-      "dueDate": "2025-12-26"
+      "dueDate": "2025-12-20"
     },
     {
-      "id": "ea65",
-      "title": "go to the gym",
-      "description": "",
+      "id": "52b0",
+      "title": "call mom",
+      "description": "tell her abt school",
       "completed": true,
-      "category": "General",
-      "dueDate": ""
+      "category": "personal",
+      "dueDate": "2025-12-24"
     },
     {
-      "id": "05bc",
-      "title": "help around",
-      "description": "",
+      "id": "84d8",
+      "title": "schedule an appointment",
+      "description": "dr. john smith pediatrician",
       "completed": false,
       "category": "health",
-      "dueDate": ""
-    },
-    {
-      "id": "7654",
-      "title": "hzfjkhzkfhg",
-      "description": "",
-      "completed": true,
-      "category": "General",
-      "dueDate": ""
-    },
-    {
-      "id": "0dbd",
-      "title": "call momm",
-      "description": "",
-      "completed": true,
-      "category": "General",
-      "dueDate": ""
+      "dueDate": "2025-12-11"
     }
   ]
 }

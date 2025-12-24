@@ -47,6 +47,11 @@ function isMobile() {
 // Render the task list
 function renderTasks(tasks) {
     tasklist.innerHTML = '';
+
+    if (tasks.length === 0) {
+  tasklist.innerHTML = `<p class="empty-state">No tasks yet </p>`;
+  return;
+}
     tasks.forEach(item => {
         const task = document.createElement('div');
         task.classList.add('task');
@@ -83,9 +88,6 @@ function renderTasks(tasks) {
             document.querySelectorAll('.task').forEach(t => t.classList.remove('selected'));
             task.classList.add('selected');
 
-            task.addEventListener('click', e => {
-            if (e.target.tagName === 'INPUT') return;
-
             // clear selection
             document.querySelectorAll('.task').forEach(t =>
                 t.classList.remove('selected')
@@ -95,17 +97,21 @@ function renderTasks(tasks) {
             activeTaskId = item.id;
 
             showTaskDetails(item);
-        });
+        
 
             activeTaskId = item.id;
             showTaskDetails(item);
         });
+
 
         task.appendChild(checkbox);
         task.appendChild(text);
         tasklist.appendChild(task);
     });
 }
+
+
+
 
 // Show task details in drawer
 function showTaskDetails(item) {
