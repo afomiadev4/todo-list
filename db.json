@@ -3,8 +3,8 @@
     {
       "id": "c3bc",
       "title": "clean ur room",
-      "description": "clear out unwanted clothes",
-      "completed": false,
+      "description": "clear out unwanted clothes                                            ",
+      "completed": true,
       "category": "hello",
       "dueDate": "2025-12-25"
     },
@@ -35,10 +35,42 @@
     {
       "id": "84d8",
       "title": "schedule an appointment",
-      "description": "dr. john smith pediatrician",
+      "description": "dr. john smith pediatrician  ",
       "completed": false,
       "category": "health",
       "dueDate": "2025-12-11"
+    },
+    {
+      "id": "4db1",
+      "title": "hu",
+      "description": "",
+      "completed": false,
+      "category": "General",
+      "dueDate": ""
+    },
+    {
+      "id": "ffde",
+      "title": "gg",
+      "description": "",
+      "completed": false,
+      "category": "General",
+      "dueDate": ""
+    },
+    {
+      "id": "d69b",
+      "title": "jj",
+      "description": "",
+      "completed": false,
+      "category": "General",
+      "dueDate": ""
+    },
+    {
+      "id": "9a94",
+      "title": "hu",
+      "description": "",
+      "completed": false,
+      "category": "General",
+      "dueDate": ""
     }
   ]
 }

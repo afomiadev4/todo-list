@@ -95,6 +95,11 @@ html,body {
   opacity: 0.6;
 }
 .task-input {
+    position: fixed;
+    bottom: 12px;
+    left: 16px;
+    right: 16px;
+    height:  64px;
     display: flex;
     align-items: center;
     gap: 12px;

@@ -110,6 +110,10 @@ function renderTasks(tasks) {
     });
 }
 
+function autoResizeTextarea(el) {
+  el.style.height = 'auto';
+  el.style.height = el.scrollHeight + 'px';
+}
 
 
 
@@ -150,9 +154,17 @@ function showTaskDetails(item) {
         titleInput.value = item.title;
         titleInput.placeholder = 'Title';
 
-        const descInput = document.createElement('input');
+        const descInput = document.createElement('textarea');
         descInput.value = item.description;
         descInput.placeholder = 'Add a description...';
+        descInput.classList.add('edit-description');
+
+        autoResizeTextarea(descInput);
+
+        descInput.addEventListener('input', () => {
+        autoResizeTextarea(descInput);
+});
+
 
         const dueInput = document.createElement('input');
         dueInput.type = 'date';
@@ -346,6 +358,9 @@ document.addEventListener('click', (e) => {
 
     activeTaskId = null;
 });
+
+
+
 
 
 // Initial load
