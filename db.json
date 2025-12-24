@@ -41,37 +41,8 @@
       "dueDate": "2025-12-11"
     },
     {
-<<<<<<< HEAD
-      "id": "4db1",
-      "title": "hu",
-      "description": "",
-      "completed": false,
-      "category": "General",
-      "dueDate": ""
-    },
-    {
-      "id": "ffde",
-      "title": "gg",
-      "description": "",
-      "completed": false,
-      "category": "General",
-      "dueDate": ""
-    },
-    {
-      "id": "d69b",
-      "title": "jj",
-      "description": "",
-      "completed": false,
-      "category": "General",
-      "dueDate": ""
-    },
-    {
-      "id": "9a94",
-      "title": "hu",
-=======
       "id": "7613",
       "title": "sfjerkhkfef",
->>>>>>> 148a8fa4d2f7f5cdd14fc315e3911bd6fcb680fe
       "description": "",
       "completed": false,
       "category": "General",
