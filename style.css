@@ -27,7 +27,6 @@ body {
     background-color: #fbf7f4;
     color: #2e2a27;
     overflow-x: hidden;
-    overflow: hidden;
 }
 html,body {
     padding: 12px;
@@ -98,11 +97,6 @@ html,body {
   opacity: 0.6;
 }
 .task-input {
-    position: fixed;
-    bottom: 12px;
-    left: 16px;
-    right: 16px;
-    height:  64px;
     display: flex;
     align-items: center;
     gap: 12px;
@@ -158,7 +152,7 @@ html,body {
 }
 .tasks-layout{
     display: flex;
-    height: 100%;
+    height: 100;
     flex: 1;
     flex-direction: column;
     gap: 20px;
